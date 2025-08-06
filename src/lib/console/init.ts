@@ -18,4 +18,6 @@ export async function logToConsole(color: Colors, ...data: any) {
 	} else {
 		console.log(`[env-cleaner]: ${data}`);
 	}
+
+	console.log(1);
 }
