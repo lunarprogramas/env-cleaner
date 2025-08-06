@@ -84,8 +84,6 @@ export class getenv {
 			logToConsole('Green', 'Updated your .env file with the missing values.');
 		}
 
-		// comment
-
 		async function writeToExampleEnvFile(data: exampleEnvValues, currentValues: envValues) {
 			// writes to the .example.env file
 			for (const value of data) {
