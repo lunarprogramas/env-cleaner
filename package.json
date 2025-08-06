@@ -1,6 +1,6 @@
 {
 	"name": "env-cleaner",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "dist/core/main.js",
 	"scripts": {
@@ -19,7 +19,7 @@
 		"url": "https://github.com/lunarprogramas/env-linter/issues"
 	},
 	"bin": {
-		"env-lint": "dist/core/main.ts"
+		"env-cleaner": "dist/core/main.ts"
 	},
 	"homepage": "https://github.com/lunarprogramas/env-linter#readme",
 	"dependencies": {
