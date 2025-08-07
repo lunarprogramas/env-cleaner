@@ -19,14 +19,12 @@ export class getenv {
 				string = atob(string); // converts from base64 to a readable string
 				const seperate = string.split(`\n`);
 
-				for (let s of seperate) {
-					if (s.startsWith('#')) {
-						continue;
-					}
-
-					const seperator = s.split(`=`);
-					let name = seperator[0];
-					name = name.replace(`\n`, '');
+				for (var s of seperate) {
+					s = s.trim();
+					if (!s || s.startsWith('#')) continue;
+					const seperator = s.split('=');
+					let name = seperator[0].trim();
+					if (!name) continue;
 					values.push({ name: name, value: seperator[1] });
 					continue;
 				}
@@ -52,13 +50,11 @@ export class getenv {
 					const seperate = string.split(`\n`);
 
 					for (var s of seperate) {
-						if (s.startsWith('#')) {
-							continue;
-						}
-
-						const seperator = s.split(`=`);
-						let name = seperator[0];
-						name = name.replace(`\n`, '');
+						s = s.trim();
+						if (!s || s.startsWith('#')) continue;
+						const seperator = s.split('=');
+						let name = seperator[0].trim();
+						if (!name) continue;
 						values.push({ name: name });
 						continue;
 					}
@@ -73,42 +69,48 @@ export class getenv {
 		}
 
 		async function writeToEnvFile(data: exampleEnvValues, currentValues: envValues) {
-			// writes to the .env file
-			for (const value of data) {
-				currentValues.push({ name: value.name, value: '' });
-				continue;
-			}
-
 			const rootdir = path.join('./');
 			const envFile = resolve(rootdir, '.env');
-			const dataToWrite: string[] = [];
+			let originalLines: string[] = [];
 
-			for (const value of currentValues) {
-				dataToWrite.push(value.name + `=` + value.value);
-				continue;
+			try {
+				originalLines = atob(readFileSync(envFile).toString('base64')).split('\n');
+			} catch {
+				originalLines = [];
 			}
 
-			writeFileSync(envFile, dataToWrite.join(`\n`));
+			const existingNames = new Set(currentValues.map(v => v.name));
+
+			for (const value of data) {
+				if (!existingNames.has(value.name)) {
+					originalLines.push(`${value.name}=`);
+				}
+			}
+
+			writeFileSync(envFile, originalLines.join('\n'));
 			logToConsole('Green', 'Updated your .env file with the missing values.');
 		}
 
 		async function writeToExampleEnvFile(data: exampleEnvValues, currentValues: envValues) {
-			// writes to the .example.env file
-			for (const value of data) {
-				currentValues.push({ name: value.name, value: '' });
-				continue;
-			}
-
 			const rootdir = path.join('./');
 			const envFile = resolve(rootdir, '.example.env');
-			const dataToWrite: string[] = [];
+			let originalLines: string[] = [];
 
-			for (const value of currentValues) {
-				dataToWrite.push(value.name + `=`);
-				continue;
+			try {
+				originalLines = atob(readFileSync(envFile).toString('base64')).split('\n');
+			} catch {
+				originalLines = [];
 			}
 
-			writeFileSync(envFile, dataToWrite.join(`\n`));
+			const existingNames = new Set(currentValues.map(v => v.name));
+
+			for (const value of data) {
+				if (!existingNames.has(value.name)) {
+					originalLines.push(`${value.name}=`);
+				}
+			}
+
+			writeFileSync(envFile, originalLines.join('\n'));
 			logToConsole('Green', 'Updated your .example.env file with the missing values.');
 		}
 
