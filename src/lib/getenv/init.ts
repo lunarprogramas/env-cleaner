@@ -20,6 +20,10 @@ export class getenv {
 				const seperate = string.split(`\n`);
 
 				for (let s of seperate) {
+					if (s.startsWith('#')) {
+						continue;
+					}
+
 					const seperator = s.split(`=`);
 					let name = seperator[0];
 					name = name.replace(`\n`, '');
@@ -48,6 +52,10 @@ export class getenv {
 					const seperate = string.split(`\n`);
 
 					for (var s of seperate) {
+						if (s.startsWith('#')) {
+							continue;
+						}
+
 						const seperator = s.split(`=`);
 						let name = seperator[0];
 						name = name.replace(`\n`, '');
