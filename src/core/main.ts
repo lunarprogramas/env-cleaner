@@ -4,7 +4,7 @@ import { getenv } from '../lib/getenv/init';
 import { packageManager } from '../lib/package/init';
 import { RegisteredCommands } from '../types/commands';
 
-export var packageVersion: string = '1.2.0';
+export var packageVersion: string = '1.2.1';
 
 const registeredCommands: RegisteredCommands = [
 	{
