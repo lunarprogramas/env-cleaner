@@ -1,13 +1,14 @@
 {
 	"name": "env-cleaner",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "",
 	"main": "dist/core/main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc",
 		"dev": "ts-node -r tsconfig-paths/register src/core/main.ts",
-		"checkEnv": "node dist/core/main.js checkEnv"
+		"checkEnv": "node dist/core/main.js checkEnv",
+		"version": "node dist/core/main.js version"
 	},
 	"repository": {
 		"type": "git",
@@ -23,7 +24,7 @@
 	},
 	"homepage": "https://github.com/lunarprogramas/env-linter#readme",
 	"dependencies": {
-		"commander": "^14.0.0",
+		"axios": "^1.11.0",
 		"path": "^0.12.7",
 		"yargs": "^18.0.0"
 	},
