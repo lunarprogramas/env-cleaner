@@ -9,7 +9,7 @@ If you wish to check if the package is outdated or requires an update please run
 If you don't have a .example.env generated it will generate one for you, and if your .env file or .example.env isn't up-to-date then the CLI will update it for you.
 
 ```diff
-+ This software is OPEN-SOURCE, you are permitted to re-distribute it but mention the authors of this software accordingly.
++ This software is licensed under the MIT License, read the LICENSE file for more details. 
 ```
 
 Made by **lunarprogramas**
