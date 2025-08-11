@@ -4,7 +4,7 @@ import { getenv } from '../lib/getenv/init';
 import { packageManager } from '../lib/package/init';
 import { RegisteredCommands } from '../types/commands';
 
-export var packageVersion: string = '1.2.2';
+export var packageVersion: string = '1.3.0';
 
 const registeredCommands: RegisteredCommands = [
 	{
@@ -21,6 +21,23 @@ const registeredCommands: RegisteredCommands = [
 		function: async () => {
 			const manager = new packageManager();
 			await manager.searchForUpdates();
+		},
+	},
+	// shortcuts
+	{
+		alias: '-v',
+		description: '[ALIAS] Checks the version and will signal if an update is needed.',
+		function: async () => {
+			const manager = new packageManager();
+			await manager.searchForUpdates();
+		},
+	},
+	{
+		alias: '-scan',
+		description: '[ALIAS] Checks environment files.',
+		function: async () => {
+			const env = new getenv();
+			await env.this();
 		},
 	},
 ];
